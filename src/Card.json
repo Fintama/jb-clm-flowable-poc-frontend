@@ -1,0 +1,256 @@
+{
+  "title": "Institutional Ebanking",
+  "type": "object",
+  "properties": {
+      "fee": {
+          "title": "Fee",
+          "type": "number"
+      },
+      "features": {
+          "type": "object",
+          "properties": {
+              "feature_enabled_trading": {
+                  "title": "Enable Trading",
+                  "type": "boolean",
+                  "default": false
+              },
+              "feature_enabled_payments": {
+                  "title": "Enable Payments",
+                  "type": "boolean",
+                  "default": false
+              },
+              "feature_enabled_view": {
+                  "title": "Enable View Portfolios",
+                  "type": "boolean",
+                  "default": false
+              }
+          },
+          "required": [
+              "feature_enabled_trading",
+              "feature_enabled_payments",
+              "feature_enabled_view"
+          ],
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled_trading": {
+                              "const": true
+                          }
+                      }
+                  },
+                  "then": {
+                      "properties": {
+                          "trading": {
+                              "title": "Trading",
+                              "type": "object",
+                              "properties": {
+                                  "fee_model": {
+                                      "title": "Fee Model",
+                                      "type": "string",
+                                      "enum": [
+                                          "Flate per Ticket",
+                                          "Spread",
+                                          "Flat"
+                                      ],
+                                      "default": "Flate per Ticket"
+                                  },
+                                  "asset_class": {
+                                      "title": "Asset class",
+                                      "type": "object",
+                                      "properties": {
+                                          "equities":{
+                                              "$ref": "#/definitions/equities"
+                                          },
+                                          "fixed_income":{
+                                              "$ref": "#/definitions/fixed_income"
+                                          },
+                                          "currencies":{
+                                              "$ref": "#/definitions/currencies"
+                                          }
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          ]
+      }
+  },
+  "definitions": {
+      "equities": {
+          "title": "Equities",
+          "type": "object",
+          "properties": {
+              "feature_enabled": {
+                  "title": "Enable Equities",
+                  "type": "boolean",
+                  "default": false
+              }
+          },
+          "required": ["feature_enabled"],
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled": {
+                              "const": "undefined"
+                          }
+                      }
+                  },
+                  "then": {},
+                  "else": {
+                      "if": {
+                          "properties": {
+                              "feature_enabled": {
+                                  "const": true
+                              }
+                          }
+                      },
+                      "then": {
+                          "properties": {
+                              "maximum_trade_size": {
+                                  "title":"Maximum Trade Size",
+                                  "type": "number"
+                              }
+                          },
+                          "required": ["maximum_trade_size"]
+                      }
+                  }
+              }
+          ]
+      },
+      "fixed_income": {
+          "title": "Fixed Income",
+          "type": "object",
+          "properties": {
+              "feature_enabled": {
+                  "title": "Enable Fixed Income",
+                  "type": "boolean",
+                  "default": false
+              }
+          },
+          "required": ["feature_enabled"],
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled": {
+                              "const": "undefined"
+                          }
+                      }
+                  },
+                  "then": {},
+                  "else": {
+                      "if": {
+                          "properties": {
+                              "feature_enabled": {
+                                  "const": true
+                              }
+                          }
+                      },
+                      "then": {
+                          "properties": {
+                              "maximum_trade_size": {
+                                  "title":"Maximum Trade Size",
+                                  "type": "number"
+                              }
+                          },
+                          "required": ["maximum_trade_size"]
+                      }
+                  }
+              }
+          ]
+      },
+      "currencies": {
+          "title": "Currencies",
+          "type": "object",
+          "properties": {
+              "feature_enabled": {
+                  "title": "Enable Currencies",
+                  "type": "boolean",
+                  "default": false
+              }
+          },
+          "required": ["feature_enabled"],
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled": {
+                              "const": "undefined"
+                          }
+                      }
+                  },
+                  "then": {},
+                  "else": {
+                      "if": {
+                          "properties": {
+                              "feature_enabled": {
+                                  "const": true
+                              }
+                          }
+                      },
+                      "then": {
+                          "properties": {
+                              "maximum_trade_size": {
+                                  "title":"Maximum Trade Size",
+                                  "type": "number"
+                              }
+                          },
+                          "required": ["maximum_trade_size"]
+                      }
+                  }
+              }
+          ]
+      },
+      "structured_products": {
+          "title": "Structured Products",
+          "type": "object",
+          "properties": {
+              "feature_enabled": {
+                  "title": "Enable Structured Products",
+                  "type": "boolean",
+                  "default": false
+              }
+          },
+          "required": ["feature_enabled"],
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled": {
+                              "const": "undefined"
+                          }
+                      }
+                  },
+                  "then": {},
+                  "else": {
+                      "if": {
+                          "properties": {
+                              "feature_enabled": {
+                                  "const": true
+                              }
+                          }
+                      },
+                      "then": {
+                          "properties": {
+                              "maximum_trade_size": {
+                                  "title":"Maximum Trade Size",
+                                  "type": "number"
+                              },
+                              "allow_accumulators": {
+                                  "title":"Allow Accumulators",
+                                  "type": "boolean",
+                                  "default": false
+                              }
+                          },
+                          "required": ["maximum_trade_size", "allow_accumulators"]
+                      }
+                  }
+              }
+          ]
+      }
+  }
+}

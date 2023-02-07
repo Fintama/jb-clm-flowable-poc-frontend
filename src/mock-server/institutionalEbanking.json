@@ -1,0 +1,204 @@
+{
+    "title": "Institutional Ebanking",
+    "type": "object",
+    "properties": {
+        "Fee": {
+            "type": "number"
+        },
+        "Features": {
+            "type": "object",
+            "properties": {
+                "feature_enabled": {
+                    "type": "boolean"
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "feature_enabled": {
+                                "const": true
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "Trading": {
+                                "type": "object",
+                                "properties": {
+                                    "Trading_enabled": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "if": {
+                                    "properties": {
+                                        "Trading_enabled": {
+                                            "const": true
+                                        }
+                                    }
+                                },
+                                "then": {
+                                    "properties": {
+                                        "Free_Model": {
+                                            "type": "string",
+                                            "enum": [
+                                                "Flate per Ticket",
+                                                "Spread",
+                                                "Flat"
+                                            ]
+                                        },
+                                        "Asset": {
+                                            "type": "object",
+                                            "title": "Asset",
+                                            "properties": {
+                                                "asset_enabled": {
+                                                    "type": "boolean", "default":false
+                                                }
+                                            },
+                                            "if": {
+                                                "properties": {
+                                                    "asset_enabled": {
+                                                        "const": true
+                                                    }
+                                                }
+                                            },
+                                            "then": {
+                                                "properties": {
+                                                    "Equities": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "equities_enabled": {
+                                                                "type": "boolean", "default":false
+                                                            }
+                                                        },
+                                                        "if": {
+                                                            "properties": {
+                                                                "equities_enabled": {
+                                                                    "const": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "then": {
+                                                            "properties": {
+                                                                "Maximum Trade Size": {
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "required":["Maximum Trade Size"]
+                                                        },
+                                                        "else": {}
+                                                    },
+                                                    "Fixed Income": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "fixed_income_enabled": {
+                                                                "type": "boolean", "default":false
+                                                            }
+                                                        },
+                                                        "if": {
+                                                            "properties": {
+                                                                "fixed_income_enabled": {
+                                                                    "const": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "then": {
+                                                            "properties": {
+                                                                "Maximum Trade Size": {
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "required":["Maximum Trade Size"]
+                                                        },
+                                                        "else": {}
+                                                    },
+                                                    "Currencies": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "currencies_enabled": {
+                                                                "type": "boolean", "default":false
+                                                            }
+                                                        },
+                                                        "if": {
+                                                            "properties": {
+                                                                "currencies_enabled": {
+                                                                    "const": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "then": {
+                                                            "properties": {
+                                                                "Maximum Trade Size": {
+                                                                    "type": "number"
+                                                                }
+                                                            },
+                                                            "required":["Maximum Trade Size"]
+                                                        },
+                                                        "else": {}
+                                                    },
+                                                    "Structured Products": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "structured_products_enabled": {
+                                                                "type": "boolean", "default":false
+                                                            }
+                                                        },
+                                                        "if": {
+                                                            "properties": {
+                                                                "structured_products_enabled": {
+                                                                    "const": true
+                                                                }
+                                                            }
+                                                        },
+                                                        "then": {
+                                                            "properties": {
+                                                                "Maximum Trade Size": {
+                                                                    "type": "number"
+                                                                },
+                                                                "Allow Accumaltors": {
+                                                                    "type": "boolean", "default":false
+                                                                }
+                                                            },
+                                                            "required": ["Maximum Trade Size"]
+                                                        },
+                                                        "else": {}
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "Payments": {
+                                "type": "object",
+                                "properties": {
+                                    "enable_payments": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "View Portfolios": {
+                                "type": "object",
+                                "properties": {
+                                    "enable_view_portfolios": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        },
+                        "required": [
+                            "Free_Model"
+                        ]
+                    }
+                }
+            ]
+        },
+        "skin": {
+            "type": "string",
+            "enum": [
+                "Dark-Mode",
+                "Light-Mode"
+            ]
+        }
+    }
+}

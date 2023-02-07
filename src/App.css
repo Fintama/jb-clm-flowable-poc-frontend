@@ -2,8 +2,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  max-width: 80rem;
 }
 
-.card {
-  max-width: 30rem;
+.App {
+  max-width: 35rem;
 }

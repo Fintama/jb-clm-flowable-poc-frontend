@@ -3,6 +3,7 @@ import "../App.css";
 import validator from "@rjsf/validator-ajv8";
 import Form from "@rjsf/mui";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 function DynamicForm() {
 
@@ -33,6 +34,9 @@ function DynamicForm() {
   }
 
   const onSubmit = async (e) => {
+    if (status !== "READY_FOR_CONFIGURATION")
+      return;
+
   console.log("🚀 ~ file: DynamicForm.jsx:40 ~ onSubmit ~ e", e)
     const formData = e.formData;
     await axios.post("http://localhost:8080/product-configuration/" + processId + "/configure", formData);
@@ -47,15 +51,16 @@ function DynamicForm() {
 
   return (
     <div className="App">
-      <h2>React JsonSchemaForm Playground</h2>
-      <p>{status}</p>
-      {schema && status === "READY_FOR_CONFIGURATION"? <div className="card">
+      <Typography align="center" variant="h2">Product Configuration</Typography>
+      <Typography align="center" variant="h3">{status}</Typography>
+      {schema? <div className="card">
           <Form
             schema={schema}
             onSubmit={(e) => onSubmit(e)}
             onChange={console.log("onChange called")}
             onError={(e) => console.log("error: ", e)}
             validator={validator}
+            disabled={status !== "READY_FOR_CONFIGURATION"}
           />
       </div> : undefined}
     </div>

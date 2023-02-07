@@ -8,3 +8,11 @@
 .App {
   max-width: 35rem;
 }
+
+.divider {
+  margin-top: 30px !important;
+}
+
+.hidden {
+  display: none;
+}

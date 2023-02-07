@@ -1,0 +1,87 @@
+{
+  "title": "Institutional Ebanking",
+  "type": "object",
+  "properties": {
+      "fee": {
+          "type": "number"
+      },
+      "features": {
+          "type": "object",
+          "properties": {
+              "feature_enabled": {
+                  "type": "boolean"
+              }
+          },
+          "allOf": [
+              {
+                  "if": {
+                      "properties": {
+                          "feature_enabled": {
+                              "const": true
+                          }
+                      }
+                  },
+                  "then": {
+                      "properties": {
+                          "Free_Model": {
+                              "type": "string",
+                              "enum": [
+                                  "Flate per Ticket",
+                                  "Spread",
+                                  "Flat"
+                              ]
+                          },
+                          "Asset": {
+                              "type": "object",
+                              "title": "Asset",
+                              "properties": {
+                                  "asset_enabled": {
+                                      "type": "boolean"
+                                  },
+                                  "test_var":{
+                                      "type":"boolean"
+                                  }
+                              },
+                              "if": {
+                                  "properties": {
+                                      "asset_enabled": {
+                                          "const": true
+                                      }
+                                  }
+                              },
+                              "then": {
+                                          "if": {
+                                              "properties": {
+                                                  "test_var": {"const": true}
+                                              }
+                                          },
+                                          "then": {
+                                              "properties": {
+                                                  "equities": {"type": "number", "maximum": 10}
+                                              }
+                                             
+                                          },
+                                          "else": {
+                                              "properties": {
+                                                  "equities": {"type": "number", "maximum": 2}
+                                              }
+                                          }
+                              }
+                          }
+                      },
+                      "required": [
+                          "Free_Model"
+                      ]
+                  }
+              }
+          ]
+      },
+      "skin": {
+          "type": "string",
+          "enum": [
+              "Dark-Mode",
+              "Light-Mode"
+          ]
+      }
+  }
+}

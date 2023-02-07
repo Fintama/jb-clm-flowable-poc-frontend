@@ -1,0 +1,173 @@
+"limit": {
+          "type": "number",
+          "properties": {
+              "maximum": {
+                  "type": "number",
+                  "if": {
+                      "properties": {
+                          "color": {
+                              "const": "blue"
+                          }
+                      }
+                  },
+                  "then": {
+                      "properties": {
+                          "maximum": {
+                              "const": 10000
+                          }
+                      }
+                  },
+                  "else": {
+                      "if": {
+                          "properties": {
+                              "color": {
+                                  "const": "silver"
+                              }
+                          }
+                      },
+                      "then": {
+                          "properties": {
+                              "maximum": {
+                                  "const": 20000
+                              }
+                          }
+                      },
+                      "else": {
+                          "if": {
+                              "properties": {
+                                  "color": {
+                                      "const": "gold"
+                                  }
+                              }
+                          },
+                          "then": {
+                              "properties": {
+                                  "maximum": {
+                                      "const": 50000
+                                  }
+                              }
+                          },
+                          "else": {
+                              "if": {
+                                  "properties": {
+                                      "color": {
+                                          "const": "black"
+                                      }
+                                  }
+                              },
+                              "then": {
+                                  "properties": {
+                                      "maximum": {
+                                          "const": 500000
+                                      }
+                                  }
+                              },
+                              "else": {
+                                  "properties": {
+                                      "maximum": {
+                                          "const": 0
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+
+
+      "insurance": {
+        "type": "boolean",
+        "if": {
+            "properties": {
+                "color": {
+                    "const": "gold"
+                }
+            }
+        },
+        "then": {
+            "type": "boolean"
+        }
+    },
+    "coverage": {
+        "type": "number",
+        "if": {
+            "properties": {
+                "color": {
+                    "const": "gold"
+                },
+                "insurance": {
+                    "const": true
+                }
+            }
+        },
+        "then": {
+            "type": "number",
+            "properties": {
+                "maximum": {
+                    "if": {
+                        "properties": {
+                            "material": {
+                                "const": "metal"
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "maximum": {
+                                "const": 100000
+                            }
+                        }
+                    },
+                    "else": {
+                        "properties": {
+                            "maximum": {
+                                "const": 50000
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "else": {
+            "if": {
+                "properties": {
+                    "color": {
+                        "const": "black"
+                    },
+                    "insurance": {
+                        "const": true
+                    }
+                }
+            },
+            "then": {
+                "type": "number",
+                "properties": {
+                    "maximum": {
+                        "if": {
+                            "properties": {
+                                "material": {
+                                    "const": "metal"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "maximum": {
+                                    "const": 200000
+                                }
+                            }
+                        },
+                        "else": {
+                            "properties": {
+                                "maximum": {
+                                    "const": 100000
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }

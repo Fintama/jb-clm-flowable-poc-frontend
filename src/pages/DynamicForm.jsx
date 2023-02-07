@@ -3,6 +3,7 @@ import "../App.css";
 import validator from "@rjsf/validator-ajv8";
 import Form from "@rjsf/mui";
 import axios from "axios";
+import { Typography } from "@mui/material";
 
 function DynamicForm() {
 
@@ -47,8 +48,8 @@ function DynamicForm() {
 
   return (
     <div className="App">
-      <h2>React JsonSchemaForm Playground</h2>
-      <p>{status}</p>
+      <Typography align="center" variant="h2">Product Configuration</Typography>
+      <Typography align="center" variant="h3">{status}</Typography>
       {schema && status === "READY_FOR_CONFIGURATION"? <div className="card">
           <Form
             schema={schema}

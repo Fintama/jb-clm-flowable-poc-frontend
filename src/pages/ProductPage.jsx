@@ -20,7 +20,7 @@ function ProductPage() {
   }, []);
 
   return (
-    <div className="App">
+    <div>
       {products ? <ProductList products={products}/> : undefined}
     </div>
   );
